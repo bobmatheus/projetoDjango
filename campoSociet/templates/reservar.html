@@ -1,0 +1,28 @@
+<h2>Reservar Campo Society</h2>
+
+<form method="POST">
+  {% csrf_token %}
+
+  <label>Campo:</label>
+  <select name="campo" required>
+    {% for campo in campos %}
+      <option value="{{ campo.id }}">{{ campo.nome }}</option>
+    {% endfor %}
+  </select><br><br>
+
+  <label>Duração:</label>
+  <select name="duracao" required>
+    <option value="1h">1 hora</option>
+    <option value="1h30">1 hora e meia</option>
+  </select><br><br>
+
+  <button type="submit">Calcular Valor</button>
+</form>
+
+{% if total %}
+  <hr>
+  <h3>Resumo da Reserva:</h3>
+  <p><strong>Campo:</strong> {{ campo_selecionado.nome }}</p>
+  <p><strong>Duração:</strong> {{ duracao }}</p>
+  <p><strong>Valor:</strong> R$ {{ total }}</p>
+{% endif %}
